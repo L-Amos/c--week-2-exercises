@@ -19,13 +19,14 @@ double IntegrateMonteCarlo3D(int n_points, double min, double max, int seed, std
     //set up random number generator here
     std::uniform_real_distribution<double> uni_dist(-1.0, 1.0);
     std::mt19937 rng_mt(seed);
+    auto rand_real = std::bind(uni_dist, rng_mt);  // Limits amount of typing
 
     for(int i = 0; i < n_points; i++)
     {
         //generate random points here
-        double x = uni_dist(rng_mt);
-        double y = uni_dist(rng_mt);
-        double z = uni_dist(rng_mt);
+        double x = rand_real;
+        double y = rand_real;
+        double z = rand_real;
         if(test_point(x, y, z)) count++;
     }
 
